@@ -6,9 +6,13 @@
 - npm install ejs --save ~~~~ for the ejs support
 - npm uninstall [packagename] ~~~~ will uninstall the specified package
 - npm list -g --depth=0 ~~~~ will list all the major packages that was installed globally, does not include their dependent packages
-- npm 
-
+- common options: [-P|--save-prod|-D|--save-dev|-O|--save-optional] [-E|--save-exact] [-B|--save-bundle] [--no-save] [--dry-run]
+  
 
 ## Running
 - node [app name] ~~~~ will start the application inside node environment
 - nodemon ~~~~ will start the application and restart it when modified
+
+
+## Others
+- curl [url] ~~~~ a tool used for transfer from or to a server
