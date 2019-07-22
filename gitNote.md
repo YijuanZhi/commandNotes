@@ -21,7 +21,6 @@
 7. git diff file.f >>> showing the difference since last time modified
    --- git add file.f git commit -m "note2" >>>to commit the new version
 8. git commit -am "note" >>> commit all the files, then throw a message
-9.
 
 #### git branch, merge and delete
 
@@ -40,7 +39,6 @@
 3. git flow feature finish newfeature1 >>> merge the feature/newfeature1 to develop and delete the branch (use 'i' to insert comments, 'esc' to exit insert mode, write ':wq' to finish commenting)
 4. git flow feature publish new-feature >>> push the feature/new-feature, if we don't have this branch in github, it's going to create the branch in github and our computer
 5. git flow feature >>> show the branches we have in feature
-6.
 
 ### git to github
 
