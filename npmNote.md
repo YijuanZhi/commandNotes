@@ -16,3 +16,6 @@
 
 ## Others
 - curl [url] ~~~~ a tool used for transfer from or to a server
+
+## For ESLint syntax checking
+- eslint --init
