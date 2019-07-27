@@ -45,6 +45,7 @@ Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js. It ma
 We can install mongoose through: 
 - **npm install --save mongoose**
 
+### Basics: save create and find
 ```javascript
 // Basic Setup ======================================================================
 // Connect to mongodb
@@ -110,4 +111,100 @@ Cat.find({}, (err, cat)=>{
     }
 });
 
+//remove
+Cat.remove({},(err, cat)=>{
+    if(err){
+        console.log(err);
+    }else{
+        console.log("You have removed all the cats:");
+        console.log(cat);
+    }
+})
+```
+
+### Associations: Embed and reference
+
+#### Embed: Embed another Schema inside a Schema:
+- let userSchema = new mongoose.Schema({name: String,email: String, **posts: [postSchema]**});
+
+```javascript
+// POSTS
+let postSchema = new mongoose.Schema({title: String,content: String});
+let Post = mongoose.model("Post", postSchema);
+
+// USER
+let userSchema = new mongoose.Schema({name: String,email: String,
+    // EMBEDED DATA TYPE!!
+    // We embeded a array of postSchema type inside of userSchema
+    posts: [postSchema]
+});
+
+let User = mongoose.model("User", userSchema); 
+
+// Creating newuser and newpost
+let newUser = new User({ email: "newboi@gmail.com", name: "Your Boi" });
+
+// 3 Ways to add post into the user 
+newUser.post.push({ title: "My First Post Ever!!!", body: "basdfnasdfdslaflsljeovnonon"});
+// or directly push the post:
+// newUser.post.push(newPost);
+// or when creating the newUser:
+// let newUser = new User({ email: "newboi@gmail.com", name: "Your Boi",posts: [newPost]});
+
+newUser.save(function(err, user){
+    if(err){
+        console.log(err);
+    }else{
+        console,log(user);
+    }
+});
+//Saving is necessary
+```
+
+#### Reference: reference the id of other objects
+- use an object which refer to the ObjectId
+
+```javascript
+let userSchema = new mongoose.Schema({name: String,email: String,
+    // REFERENCE!!
+    // An array of objects
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post"
+        }
+    ]
+});
+let User = mongoose.model("User", userSchema);
+let newUser2 = new User({
+    name: "New Boi",
+    email: "newboi@gmail.com"
+});
+
+// create and save the new post id into the posts array inside the user
+Post.create({
+    title: "New post by our New Boi",
+    content: "dsajfkadsjlflsadjfldsajlkfdksl"
+}, (err, post)=>{
+    User.findOne({name: "New Boi"}, (err, user)=>{
+        // Directly push the new post object, they will handle the rest
+        user.posts.push(post);
+        user.save((err, user)=>{
+            console.log("successfully save an new post id to the user");
+            console.log(user);
+        });
+    });
+});
+
+
+// In this situation, finding the user
+// and find all the posts of the user
+User.findOne({name: "New Boi"}).populate("posts").exec((err, user)=>{
+    if(err){
+        console.log(err);
+    }else{
+        // This will print the user with detailled posts objects instead of ids
+        console.log(user);
+    }
+});
 ```

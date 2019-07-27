@@ -1,3 +1,6 @@
+These notes only specify "what" to use. If you are looking for "how" and "when" to use it, please refer to detailed documentation!
+*****
+
 # MongoBD and Mongoose Commands Notes
 
 ## MongoDB
@@ -240,7 +243,6 @@ Cat.find({}, (err, cat)=>{
 
 - C-x C-j >>> open dired mode in the current directory
 - C-x d >>> open dired mode
-- - > > > create a directory
 - C-x C-f >>> create a file
 - g >>> refresh dired buffer
 - C(capital c) >>> copy file
