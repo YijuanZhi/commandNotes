@@ -38,7 +38,10 @@
 
 
 #### Git stash
-1. `git stash` 
+Use git stash when you want to record the current state of the working directory and the index, but want to go back to a clean working directory. The command saves your local modifications away and reverts the working directory to match the HEAD commit.
+1. `git stash`  stash the current state into a temp folder, and revert to the head of last commit
+2. `git stash apply` pull the stash back into the current working tree
+3. `git stash list` list all the stashes stored
 
 #### Git branch, switch, merge and delete
 1. `git branch newBranch` >>> create a new branch
