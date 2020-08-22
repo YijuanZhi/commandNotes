@@ -1,4 +1,5 @@
-# SQL Learning
+
+# MYSQL Learning
 
 - show databases;
 - create database [NAME];
