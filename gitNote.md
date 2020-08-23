@@ -42,6 +42,7 @@ Use git stash when you want to record the current state of the working directory
 1. `git stash`  stash the current state into a temp folder, and revert to the head of last commit
 2. `git stash apply` pull the stash back into the current working tree
 3. `git stash list` list all the stashes stored
+4. `git stash clear` clear the stash store
 
 #### Git branch, switch, merge and delete
 1. `git branch newBranch` >>> create a new branch
@@ -62,10 +63,11 @@ Use git stash when you want to record the current state of the working directory
 
 ##### clone from repo url or connect to remote repo
 - `git remote add origin <url>` requires this at the first time, connect to github repo
-- `git clone <url>` this is going to clone the target files into the directory that you are in
+- `git clone <url>` clone the target files into the directory that you are in, by default it clones and only clones the master branch
+- `git clone -b <branchName> <url>` clone and only clone specific branch from the remote repo
 
 ##### pull modified files back to another computer
 - `git fetch` add the new added file into local git but doesn't merge
 - `git diff master origin/master` after downloading files, we check the difference
 - `git pull origin master` if we are fine with the diff, fetch and merge the files back into the computer
-- `git pull` is equal to `git fetch` plus `git merge`
+- `git pull` is equal to `git fetch` plus `git merge`, the later one is prefered, you can use `git diff` after `git fetch`to see if everything is good
