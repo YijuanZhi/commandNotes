@@ -39,8 +39,8 @@
 #### Concepts: Defaults
 1. Default, each container connected to a private virutal netowrk "bridge"
 2. Each virtual network rotes through NAT firewall on host IP
-3. All containers on one virtual network can talk to each other *directly* without -p
-4. Best practice is to create *a new virtual network* for *each app*:
+3. All containers on one virtual network can talk to each other **directly** without -p
+4. Best practice is to create **a new virtual network** for **each app**:
    - network "my-web-app" for my sql and php/apache containers
    - network "my-api" for mongo and nodejs containers
 
@@ -52,7 +52,7 @@
    - `inspect` will return all config info of the container in JSON format
    - `--format` take only the arguements as input, in this case we only want the ip address
 3. `docker container run -d --name new_nginx --network {created network name} nginx`
-   - start a *new* container with a specified network
+   - start a **new** container with a specified network
    - `--network` will let this container use the specified network
 
 
@@ -60,9 +60,9 @@
 
 ##### Docker Default Networks
 1. bridge
-   - *default* docker virtual network, which is NAT'ed behind the host ip
+   - **default** docker virtual network, which is NAT'ed behind the host ip
 2. host
-   - It gains performance by *skipping virtual networks* but *sacrifices security* of container model
+   - It gains performance by **skipping virtual networks** but **sacrifices security** of container model
 3. none
    - removes etho0 and only leaves you with localhost interface in container (interface that is not attached to anything)
 
