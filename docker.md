@@ -347,6 +347,13 @@ CMD ["param1","param2"]
 4. Namespace: Filtered group of objects in cluster.
 5. Secrets, ConfigMaps and more.
 
+### Kubernetes Run, create and apply
+
+We have 3 ways to create pods from the kubectl CLI
+1. `kubectl run` changing to be only for pod creation from 1.18   
+2. `kubectl create` create some resourcs via CLI or YAML
+3. `kuberctl apply` create/update anything via YAML
+
 ### Kubernetes CLI Baics
 1. `kubectl version`
 2. `kubectl run [your pod name] --image [image name]` starting from **version 1.18**, this only create a pod, like docker does
@@ -405,9 +412,46 @@ CMD ["param1","param2"]
 8. `kubectl create job [test job name] --image [image name] --dry-run-client -o yaml`
 9. `kubectl expose deployment/test --port 80 --dry-run -o yaml` will not work as it doesn't not actually deploy itself.
 
-### Kubernetes Run, create and apply
+### Three Management Approaches
+1. ***Imperative commands***: `run, expose, scale, edit, create deployment`
+   - Best for dev/learning/personal projects
+   - Easy to learn, hardest to manage over time
+2. ***Imperative objects***: `create -f file.yml, replace -f file.yml, delete`..
+   - Good for prod of small environments, single file per command
+   - Store your changes in git-based yaml files
+   - Hard to automate
+3. ***Declarative objects***: `apply -f file.yml, dir\, diff`
+   - Best for prod, easier to automate
+   - Harder to understand and predict changes
 
-We have 3 ways to create pods from the kubectl CLI
-1. `kubectl run` changing to be only for pod creation from 1.18   
-2. `kubectl create` create some resourcs via CLI or YAML
-3. `kuberctl apply` create/update anything via YAML
+### Moving to Declarative Kubernetes YAML
+
+#### Commands to apply yaml file
+1. create/update resources in a file
+   - `kubectl apply -f filename.yml` 
+   - is the main command to let the kubernetes use yml file
+2. create/update a whole directory of yaml(s)
+   - `kubectl apply -f myyaml/`
+3. create/update from a URL
+   - `kubectl apply -f https://bret.run/pod.yml`
+
+#### Kubernetes ConfigMap: YAML file basics
+1. Kubernetes configuration file(YAML or JSON)
+2. Each file contains one or more ***manifests***
+3. Each manifest describes an api object(deployment, job, secret)
+4. Each manifest needs four parts(root key:values in the file)
+   - `apiVersion:` 
+   - `kind:`
+   - `metadata:`
+   - `spec:`
+
+#### Manifest and 4 parts
+Here is how we could approach them:
+1. `apiVersion:`
+   - `kubectl api-versions` list all the `apiVersion`s corresponding to the api-resources `apigroup`
+2. `kind:`
+   - `kubectl api-resources` lists all the resource names and its corresponding `kind`
+3. `metadata:` 
+   - only define the `name` field
+4. `spec:` is where all the action is at
+   - 
