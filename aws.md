@@ -1,4 +1,4 @@
-# AWS Udemy Learning Course Notes
+# AWS S3
 
 ## IAM: Identity Access Management
 
@@ -54,9 +54,76 @@
    - For data accessed less frequently, but requires rapid access when needed. Changed with retrieval fee.
 3. S3 One Zone IA
    - S3 IA but doesn't require the multiple availability zone
+   - May not be availiable when needed, 99.5%
 4. S3 Intelligent Tiering
    - Desinged to optimize costs by automatically moving data to the most cost-effective access tier without performance impact or overhead.
 5. S3 Glacier
    - Low-cost storage class for data archiving, but slow retrieval speed.
 6. S3 Glacier Deep Archive
    - Lowest-cost storage class, retrieval time of 12 hours is acceptable.
+
+### Restricting Bucket Access
+1.  BUcket Policies - Applies across the whole bucket.
+2.  Object policies - Applies to individual files
+3.  IAM Policies to Users & Groups - Applies to Users & Groups.
+
+### S3 Encryption 
+*Achieved by SSL/TLS*
+
+Encryption at rest(server side) is achieved by:
+- S3 managed keys - SSE - S3
+- AWS key management service, managed keys - SSE - KMS
+- Server side encryption with customer provided keys -SSE-C
+Client Side encryption: encrypted by client and uploaded to S3.
+
+# Versioning
+1. Stores all versions of an object(including all writes and even if you delete an object, which will just create a delete marker on top of that file).
+2. Once Version is enabled, it cannot be disabled, only suspended, which will not record future version update but keep the previous version updates.
+3. MDA delete capability.
+
+### S3 Object Lock
+1. Governance mode: Users can't overwrite or delete an object servion or alter its lock settings unless they have special persimissions.
+2. Compliance mode: a protected object versioncan't be overwrittern or deleted by any user, including the root user in your AWS account.
+3. S3 Gacier Vault lock: specify conteols such as WORM in a vault lock policy and lock the policy from future edits. Can be applied or removed anytime.
+
+### S3 Performance
+1. `mybucketname/foler1/subfoler1/myfile.jpb` the prefix is `/folder1/subfolder1`
+2. Can achieve a high number of request per second per prefix: 3,500 put/copu/post/delete and 5,500 get/head.
+3. Can get better performance by spreading read across different prefixes.
+4. If using SSE-KMS, there is KMS limits
+5. Use multipar tuploads to increase performance when uploading files to S3, recommanded for any files over 100mb, must be used for any file over 5gb. 
+6. Use S3 byte-range fetches to increase performance when downloading files to S3.
+
+### S3 Select
+Allows use a simple SQL expression to return on ly the data from the store instead of retriving the entire object, which can imporves the performance of underlying application.
+
+### Cloud Front
+1. Edge location: the location where content will be cached. This is separate to an AWS region/AZ.
+2. Origin: the source of files that CDN will distribute. Can be S3 Bucket, EC2 Instance, an Elastic Load Balancer or Route 53.
+3. Distribution: name given the CDN which consists of a collection of Edge locations.
+   - Web Distribution: used for websites
+   - RTMP: dor adobe media streaming.
+4.  Objects are cached for the lofe of the TTL(Time to Live)
+5.  Objects can be invalidated for limited access to other objects.
+
+### S3 Storage Gateway
+1. File Gateway: for flat files, stored directly on S3.
+2. Volume Gateway:
+   - Stored Volumes: Entire Dateset is stored on site and is asynchronously backed up to S3.
+   - Cached Volumes: Entire dateset is tored on S3 and the most frequently accessed data is cached on site.
+3. Gateway Virtual tape Library
+
+### Athena vs Macie
+1. Athena:
+   - I tis an interactive query service
+   - Allows you to query data located in S3 using standard SQL for analysis purposes.(log, report....)
+   - Serverless
+2. Macie:
+   - Uses AI to analyze data in S3 and helps identify PII(Personal Identifiable Information)
+   - Can be used to analyse CloudTrail logs for syspicious API acticity
+   - Dashboards, reports and alerting
+   - Prevent ID theft
+
+
+# AWS EC2(Elastic Compute Cloud)
+
