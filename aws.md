@@ -127,3 +127,31 @@ Allows use a simple SQL expression to return on ly the data from the store inste
 
 # AWS EC2(Elastic Compute Cloud)
 
+Amazon Elastic Compute Cloud(Amazon EC2) is a web service that provides resizable compute capacity in the cloud. Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requrements change.
+
+### Pricing Tags
+1. On Demand:
+   - Allows you to pay a fixed rate by the hour with no commitment.
+2. Reserved:
+   - Provides you with a capacity reservation, and offer a significant discount on the hourly charge for an instance. Term can be 1 or 3 years.
+3. Spot:
+   - Enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times.
+4. Dedicated Hosts:
+   - Physical EC2 Server dedicated for your use. Dedicated Hosts can help you reduce costs by allowing you to use your existing server-bound software licenses.
+
+### Tips
+1. Termination Protection is turned off by default, you must turn it on on your own.
+2. On an EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated. But any additional volumes created will not be deleted when terminated by default.
+3. BES root volumes of your default AMI's can be encrypted. You can also use a third party tool (such as bit locker etc) to encrypt the root volume, or this can be done when creating AMI's in AWS console or using the API.
+4. Additional volumes can be encrypted.
+
+### Security Groups in EC2
+1. Changes to security groups take effect immediately.
+2. Can have any number of EC2 instances within a security group.
+3. Can have multiple security groups attached to EC2 instances.
+4. **Security groups are stateful**, Inbound/outbound traffic:
+   - All inbound traffic is blocked by default.
+   - All outbound traffic is allowed.
+   - If you create an inbound rule allowing traffic in, that traffic is automatically allowed back out again.
+   - Cannot block specific IP addresses using Security Groups, instead use Network Access Control Lists.
+5. Can specify allow rules, but not deny rules.
