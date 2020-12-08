@@ -155,3 +155,23 @@ Amazon Elastic Compute Cloud(Amazon EC2) is a web service that provides resizabl
    - If you create an inbound rule allowing traffic in, that traffic is automatically allowed back out again.
    - Cannot block specific IP addresses using Security Groups, instead use Network Access Control Lists.
 5. Can specify allow rules, but not deny rules.
+
+# Amazon EBS(Elastic Block Store)
+Amazon Elastic Block Store provides persistent block storage volumes for use with Amazon EC2 instanfes in the AWS cloud. Each  amazon EBS volumes is automatically replicated within its availability zone to protect you from component failure, offering high availability anmd durability.
+
+*Always make sure that EBS storage is in the same zone as EC2 instance in AWS.
+
+5 different types of EBS storage:
+1. General Purpose(SSD)
+2. Provisioned IOPS(SSD)
+3. Throughput Optimised hard disk drive(HDD)
+4. Cold Hard Disk Drive(HDD)
+5. Magnetic(HDD)
+
+|       Volume Type        |                                     Description                                      |         Use Cases          | API Name | Volume Size  | Max. IOPS/Volume |
+| :----------------------: | :----------------------------------------------------------------------------------: | :------------------------: | :------: | :----------: | :--------------: |
+|   General Purpose SSD    |            General Purpose SSD volume that balance price and performance             |      Most Work Loads       |   gp2    |  1GB - 16TB  |      16,000      |
+|   Provisioned IOPS SSD   |      Highest Performance SSD volume designed for mission-critical applications       |         Databases          |   io1    |  4GB - 16TB  |      64,000      |
+| Throughput Optimized HDD | Low cost HDD volume desgined for frequently accessed, throughput-intensive workloads | Big data & Data Warehouses |   st1    | 500GB - 16TB |       500        |
+|         Cold HDD         |        Lowest cost HDD volume designed for less frequently accessed workloads        |        file servers        |   sc1    | 500GB - 16GB |       250        |
+|       EBS Magnetic       |                               Previous Generaltion HDD                               | data infrequently accessed | standard |  1gb - 1TB   |      40-200      |
